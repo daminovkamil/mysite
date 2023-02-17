@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<style>
+    :root {
+        font-family: 'Roboto Slab', serif;
+        font-style: normal;
+        font-weight: normal;
+        --tg-theme-bg-color: white;
+        --tg-theme-text-color: black;
+        --tg-theme-hint-color: gray;
+        --tg-theme-link-color: blue;
+        --tg-theme-button-color: #178cbb;
+        --tg-theme-button-text-color: white;
+        --tg-theme-secondary-bg-color: lightgray;
+    }
+
+    body {
+        padding: 0;
+        margin: 0;
+        background: var(--tg-theme-secondary-bg-color);
+    }
+
+    .container {
+        margin-left: calc((100% - min(100vw, 100vh)) / 2);
+        width: min(100vw, 100vh);
+    }
+
+    .olympiad {
+        font-size: min(5vw, 5vh);
+        width: calc(100% - min(3vw, 3vh) * 2);
+        height: min(40vw, 40vh);
+        margin: min(3vw, 3vh);
+        padding: min(5vw, 5vh);
+        border-radius: min(2vw, 2vh);
+        background: var(--tg-theme-bg-color);
+        color: var(--tg-theme-text-color);
+        float: left;
+        text-align: center;
+        border-width: 0;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        transition-duration: 0.4s;
+    }
+
+    .olympiad.added {
+        border-radius: 0;
+        background: var(--tg-theme-button-color);
+        color: var(--tg-theme-button-text-color);
+        box-shadow: none;
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
+
+    .search {
+        margin: min(3vw, 3vh) min(2vw, 2vh);
+        padding: min(7vw, 7vh);
+        border-radius: min(8vw, 8vh);
+        font-size: min(5vw, 5vh);
+        width: calc(100% - min(4vw, 4vh));
+        box-sizing: border-box;
+    }
+
+    .search_container {
+        margin-left: calc((100% - min(100vw, 100vh)) / 2);
+        width: min(100vw, 100vh);
+        top: 0;
+        background: var(--tg-theme-bg-color);
+        position: fixed;
+        height: min(35vh, 35vw);
+        border-bottom-left-radius: min(2vw, 2vh);
+        border-bottom-right-radius: min(2vw, 2vh);
+    }
+
+    .divider {
+        margin-bottom: min(38vh, 38vw);
+    }
+
+    /* Customize the label (the container) */
+    .checkbox_container {
+        text-align: center;
+        font-size: min(3vw, 3vh);
+        color: var(--tg-theme-hint-color);
+        display: block;
+        position: relative;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    /* Hide the browser's default checkbox */
+    .checkbox_container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    .checkmark {
+        margin-left: min(23vw, 23vh);
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: min(4vw, 4vh);
+        width: min(4vw, 4vh);
+        background-color: var(--tg-theme-secondary-bg-color);
+    }
+
+    .checkbox_container input:checked ~ .checkmark {
+        background-color: var(--tg-theme-button-color);
+    }
+
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    .checkbox_container input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    .checkbox_container .checkmark:after {
+        left: min(1.4vw, 1.4vh);
+        top: min(0.8vw, 0.8vh);
+        width: min(0.9vw, 0.9vh);
+        height: min(1.5vw, 1.5vh);
+        border: solid var(--tg-theme-button-text-color);
+        border-width: 0 min(0.6vw, 0.6vh) min(0.6vw, 0.6vh) 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+</style>
+<body>
+<div class="search_container">
+    <input class="search" type="text" id="search" onkeyup="activity_filter()" placeholder="Поиск олимпиад">
+    <label class="checkbox_container">Показать только выбранные
+        <input type="checkbox" id="checkbox" onclick="activity_filter()">
+        <span class="checkmark"></span>
+    </label>
+</div>
+<div class="divider"></div>
+<div class="container">
+    {% for olympiad in cool_olympiads %}
+        <button class="olympiad" id="{{ olympiad }}"
+                onclick="button_click('{{ olympiad }}'); activity_filter()">{{ olympiad }}</button>
+    {% endfor %}
+</div>
+</body>
+<script type="application/javascript">
+    let chosen_olympiads = [];
+
+    function button_click(button_id) {
+        let button = document.getElementById(button_id);
+        if (button.classList.contains("added")) {
+            button.classList.remove("added");
+            chosen_olympiads.splice(chosen_olympiads.indexOf(button_id), 1);
+        } else {
+            button.classList.add("added");
+            chosen_olympiads.push(button_id);
+        }
+    }
+
+    function activity_filter() {
+        let input = document.getElementById('search');
+        let filter = input.value.toUpperCase();
+        let activities = document.getElementsByClassName("olympiad");
+        let checkbox = document.getElementById("checkbox");
+
+        for (let i = 0; i < activities.length; i++) {
+            let txtValue = activities[i].innerHTML;
+            if (txtValue.toUpperCase().indexOf(filter) > -1 &&
+                (!checkbox.checked || activities[i].classList.contains("added"))) {
+                activities[i].style.display = "";
+            } else {
+                activities[i].style.display = "none";
+            }
+        }
+    }
+
+    {% for olympiad in user_olympiads %}
+        button_click('{{ olympiad }}')
+    {% endfor %}
+
+    let tg = window.Telegram.WebApp;
+    tg.expand();
+    tg.MainButton.color = "#0dbb00";
+    tg.MainButton.text = "Сохранить";
+    tg.MainButton.show();
+    tg.onEvent('mainButtonClicked', function () {
+        let data = {
+            subjects: chosen_olympiads
+        }
+        tg.sendData(JSON.stringify(data));
+    });
+</script>
+</html>

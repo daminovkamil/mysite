@@ -42,8 +42,22 @@ db = Database()
 
 
 def show_subjects(request, user_id: int):
-    data = db.one("SELECT data FROM users WHERE user_id = %s", (user_id,))
+    data = db.one("SELECT data FROM users WHERE user_id = %s" % user_id)
     if data is None:
         return Http404
     data = json.loads(data)
-    return render(request, 'subjects.html', data)
+    return render(request, "subjects.html", data)
+
+
+def show_olympiads(request, user_id: int):
+    data = db.one("SELECT data FROM users WHERE user_id = %s" % user_id)
+    if data is None:
+        return Http404
+    data = json.loads(data)
+    user_olympiads = data["olympiads"]
+    cool_olympiads = db.all("SELECT activity_name FROM cool_olympiads")
+    context = {
+        "user_olympiads": user_olympiads,
+        "cool_olympiads": cool_olympiads
+    }
+    return render(request, "olympiads.html", context)
