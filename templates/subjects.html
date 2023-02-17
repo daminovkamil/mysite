@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Spray+Paint&display=swap" rel="stylesheet">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<style>
+    body {
+        font-family: monospace;
+        padding: 0;
+        margin: 0;
+        background: var(--tg-theme-secondary-bg-color);
+    }
+
+    .container {
+        margin-left: calc((100% - min(100vw, 100vh)) / 2);
+        width: min(100vw, 100vh);
+    }
+
+    .subject {
+        font-family: 'Rubik Spray Paint', cursive;
+        font-style: normal;
+        font-weight: normal;
+        font-size: min(5vw, 5vh);
+        width: calc(100% - min(3vw, 3vh) * 2);
+        height: min(26vw, 26vh);
+        margin: min(3vw, 3vh);
+        padding: min(5vw, 5vh);
+        border-radius: min(2vw, 2vh);
+        background: var(--tg-theme-bg-color);
+        color: var(--tg-theme-text-color);
+        float: left;
+        text-align: center;
+        border-width: 0;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+        transition-duration: 0.4s;
+    }
+
+    .subject.added {
+        border-radius: 0;
+        background: var(--tg-theme-button-color);
+        color: var(--tg-theme-button-text-color);
+        box-shadow: none;
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
+</style>
+<body>
+<div class="container">
+    <button class="subject" onclick="button_click('Английский язык')" id="Английский язык">Английский язык</button>
+    <button class="subject" onclick="button_click('Арабский язык')" id="Арабский язык">Арабский язык</button>
+    <button class="subject" onclick="button_click('Астрономия')" id="Астрономия">Астрономия</button>
+    <button class="subject" onclick="button_click('Биология')" id="Биология">Биология</button>
+    <button class="subject" onclick="button_click('География')" id="География">География</button>
+    <button class="subject" onclick="button_click('ИЗО')" id="ИЗО">ИЗО</button>
+    <button class="subject" onclick="button_click('Информатика')" id="Информатика">Информатика</button>
+    <button class="subject" onclick="button_click('Искусство')" id="Искусство">Искусство</button>
+    <button class="subject" onclick="button_click('Испанский язык')" id="Испанский язык">Испанский язык</button>
+    <button class="subject" onclick="button_click('История')" id="История">История</button>
+    <button class="subject" onclick="button_click('Итальянский язык')" id="Итальянский язык">Итальянский язык</button>
+    <button class="subject" onclick="button_click('Китайский язык')" id="Китайский язык">Китайский язык</button>
+    <button class="subject" onclick="button_click('Лингвистика')" id="Лингвистика">Лингвистика</button>
+    <button class="subject" onclick="button_click('Литература')" id="Литература">Литература</button>
+    <button class="subject" onclick="button_click('Математика')" id="Математика">Математика</button>
+    <button class="subject" onclick="button_click('Менеджмент')" id="Менеджмент">Менеджмент</button>
+    <button class="subject" onclick="button_click('Немецкий язык')" id="Немецкий язык">Немецкий язык</button>
+    <button class="subject" onclick="button_click('ОБЖ')" id="ОБЖ">ОБЖ</button>
+    <button class="subject" onclick="button_click('Обществознание')" id="Обществознание">Обществознание</button>
+    <button class="subject" onclick="button_click('Основы предпринимательства')" id="Основы предпринимательства">Основы предпринимательства</button>
+    <button class="subject" onclick="button_click('Право')" id="Право">Право</button>
+    <button class="subject" onclick="button_click('Психология')" id="Психология">Психология</button>
+    <button class="subject" onclick="button_click('Робототехника')" id="Робототехника">Робототехника</button>
+    <button class="subject" onclick="button_click('Русский язык')" id="Русский язык">Русский язык</button>
+    <button class="subject" onclick="button_click('Технология')" id="Технология">Технология</button>
+    <button class="subject" onclick="button_click('Физика')" id="Физика">Физика</button>
+    <button class="subject" onclick="button_click('Физическая культура')" id="Физическая культура">Физическая культура</button>
+    <button class="subject" onclick="button_click('Французский язык')" id="Французский язык">Французский язык</button>
+    <button class="subject" onclick="button_click('Химия')" id="Химия">Химия</button>
+    <button class="subject" onclick="button_click('Черчение')" id="Черчение">Черчение</button>
+    <button class="subject" onclick="button_click('Экология')" id="Экология">Экология</button>
+    <button class="subject" onclick="button_click('Экономика')" id="Экономика">Экономика</button>
+    <button class="subject" onclick="button_click('Японский язык')" id="Японский язык">Японский язык</button>
+</div>
+</body>
+<script type="application/javascript">
+    let chosen_subjects = [];
+    function button_click(button_id) {
+        let button = document.getElementById(button_id);
+        if (button.classList.contains("added")) {
+            button.classList.remove("added");
+            chosen_subjects.splice(chosen_subjects.indexOf(button_id), 1);
+        } else {
+            button.classList.add("added");
+            chosen_subjects.push(button_id);
+        }
+    }
+
+    {% for subject in subjects %}
+    button_click('{{ subject }}')
+    {% endfor %}
+
+    let tg = window.Telegram.WebApp;
+    tg.expand();
+    tg.MainButton.color = "#0dbb00";
+    tg.MainButton.text = "Сохранить";
+    tg.MainButton.show();
+    tg.onEvent('mainButtonClicked', function(){
+        let data = {
+            subjects: chosen_subjects
+        }
+        tg.sendData(JSON.stringify(data));
+    });
+</script>
+</html>

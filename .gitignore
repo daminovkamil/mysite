@@ -1,0 +1,5 @@
+venv
+mysite/settings.py
+.idea
+__pycache__
+files/admin
