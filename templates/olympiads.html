@@ -193,7 +193,7 @@
     }
 
     {% for activity_id in user_olympiads %}
-        button_click('{{ activity_id }}')
+    button_click('{{ activity_id }}');
     {% endfor %}
 
     let tg = window.Telegram.WebApp;
