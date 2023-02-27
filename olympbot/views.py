@@ -11,21 +11,16 @@ database_data = {
 }
 
 
-class Database:
-    def __init__(self):
-        self.connection = connect(**database_data)
-
-    def run(self, *args):
-        if not self.connection.is_connected():
-            self.connection = connect(**database_data)
-        with self.connection.cursor() as cursor:
+def run(*args):
+    with connect(**database_data) as connection:
+        with connection.cursor() as cursor:
             cursor.execute(*args)
-            self.connection.commit()
+            connection.commit()
 
-    def one(self, *args):
-        if not self.connection.is_connected():
-            self.connection = connect(**database_data)
-        with self.connection.cursor() as cursor:
+
+def one(*args):
+    with connect(**database_data) as connection:
+        with connection.cursor() as cursor:
             cursor.execute(*args)
             res: tuple | None = cursor.fetchone()
             if res is not None and len(res) == 1:
@@ -33,25 +28,19 @@ class Database:
             else:
                 return res
 
-    def all(self, *args):
-        if not self.connection.is_connected():
-            self.connection = connect(**database_data)
-        with self.connection.cursor() as cursor:
+
+def all(*args):
+    with connect(**database_data) as connection:
+        with connection.cursor() as cursor:
             cursor.execute(*args)
             res = cursor.fetchall()
             if len(res) != 0 and len(res[0]) == 1:
                 res = [item[0] for item in res]
             return res
 
-    def __del__(self):
-        self.connection.close()
-
-
-db = Database()
-
 
 def show_subjects(request, user_id: int):
-    data = db.one("SELECT data FROM users WHERE user_id = %s" % user_id)
+    data = one("SELECT data FROM users WHERE user_id = %s" % user_id)
     if data is None:
         return Http404
     data = json.loads(data)
@@ -59,12 +48,12 @@ def show_subjects(request, user_id: int):
 
 
 def show_olympiads(request, user_id: int):
-    data = db.one("SELECT data FROM users WHERE user_id = %s" % user_id)
+    data = one("SELECT data FROM users WHERE user_id = %s" % user_id)
     if data is None:
         return Http404
     data = json.loads(data)
     user_olympiads = sorted(data["olympiads"])
-    cool_olympiads = db.all("SELECT activity_name, activity_id FROM cool_olympiads")
+    cool_olympiads = all("SELECT activity_name, activity_id FROM cool_olympiads")
     context = {
         "user_olympiads": user_olympiads,
         "cool_olympiads": cool_olympiads
