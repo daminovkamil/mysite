@@ -16,11 +16,15 @@ class Database:
         self.connection = connect(**database_data)
 
     def run(self, *args):
+        if not self.connection.is_connected():
+            self.connection = connect(**database_data)
         with self.connection.cursor() as cursor:
             cursor.execute(*args)
             self.connection.commit()
 
     def one(self, *args):
+        if not self.connection.is_connected():
+            self.connection = connect(**database_data)
         with self.connection.cursor() as cursor:
             cursor.execute(*args)
             res: tuple | None = cursor.fetchone()
@@ -30,12 +34,17 @@ class Database:
                 return res
 
     def all(self, *args):
+        if not self.connection.is_connected():
+            self.connection = connect(**database_data)
         with self.connection.cursor() as cursor:
             cursor.execute(*args)
             res = cursor.fetchall()
             if len(res) != 0 and len(res[0]) == 1:
                 res = [item[0] for item in res]
             return res
+
+    def __del__(self):
+        self.connection.close()
 
 
 db = Database()
@@ -54,7 +63,7 @@ def show_olympiads(request, user_id: int):
     if data is None:
         return Http404
     data = json.loads(data)
-    user_olympiads = data["olympiads"]
+    user_olympiads = sorted(data["olympiads"])
     cool_olympiads = db.all("SELECT activity_name FROM cool_olympiads")
     context = {
         "user_olympiads": user_olympiads,

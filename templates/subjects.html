@@ -11,6 +11,19 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <style>
+    :root {
+        font-family: 'Roboto Slab', serif;
+        font-style: normal;
+        font-weight: normal;
+        --tg-theme-bg-color: #17212B;
+        --tg-theme-text-color: #D1F2F0;
+        --tg-theme-hint-color: #556C80;
+        --tg-theme-link-color: #6BBFFF;
+        --tg-theme-button-color: #2B5278;
+        --tg-theme-button-text-color: white;
+        --tg-theme-secondary-bg-color: #0E1621;
+    }
+
     body {
         padding: 0;
         margin: 0;
@@ -23,9 +36,6 @@
     }
 
     .subject {
-        font-family: 'Roboto Slab', serif;
-        font-style: normal;
-        font-weight: normal;
         font-size: min(5vw, 5vh);
         width: calc(100% - min(3vw, 3vh) * 2);
         height: min(26vw, 26vh);

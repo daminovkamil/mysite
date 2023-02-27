@@ -15,13 +15,13 @@
         font-family: 'Roboto Slab', serif;
         font-style: normal;
         font-weight: normal;
-        --tg-theme-bg-color: white;
-        --tg-theme-text-color: black;
-        --tg-theme-hint-color: gray;
-        --tg-theme-link-color: blue;
-        --tg-theme-button-color: #178cbb;
+        --tg-theme-bg-color: #17212B;
+        --tg-theme-text-color: #D1F2F0;
+        --tg-theme-hint-color: #556C80;
+        --tg-theme-link-color: #6BBFFF;
+        --tg-theme-button-color: #2B5278;
         --tg-theme-button-text-color: white;
-        --tg-theme-secondary-bg-color: lightgray;
+        --tg-theme-secondary-bg-color: #0E1621;
     }
 
     body {
@@ -41,7 +41,7 @@
         height: min(40vw, 40vh);
         margin: min(3vw, 3vh);
         padding: min(5vw, 5vh);
-        border-radius: min(2vw, 2vh);
+        border-radius: min(4vw, 4vh);
         background: var(--tg-theme-bg-color);
         color: var(--tg-theme-text-color);
         float: left;
@@ -59,6 +59,7 @@
         margin-left: 0;
         margin-right: 0;
         width: 100%;
+        padding: min(8vw, 8vh);
     }
 
     .search {
@@ -71,14 +72,14 @@
     }
 
     .search_container {
-        margin-left: calc((100% - min(100vw, 100vh)) / 2);
-        width: min(100vw, 100vh);
+        width: 100%;
         top: 0;
         background: var(--tg-theme-bg-color);
-        position: fixed;
-        height: min(35vh, 35vw);
-        border-bottom-left-radius: min(2vw, 2vh);
-        border-bottom-right-radius: min(2vw, 2vh);
+        position: sticky;
+        height: min(37vh, 37vw);
+        border-bottom-left-radius: min(4vw, 4vh);
+        border-bottom-right-radius: min(4vw, 4vh);
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
 
     .divider {
@@ -88,7 +89,7 @@
     /* Customize the label (the container) */
     .checkbox_container {
         text-align: center;
-        font-size: min(3vw, 3vh);
+        font-size: min(4.5vw, 4.5vh);
         color: var(--tg-theme-hint-color);
         display: block;
         position: relative;
@@ -109,12 +110,12 @@
     }
 
     .checkmark {
-        margin-left: min(23vw, 23vh);
+        margin-left: min(8vw, 8vh);
         position: absolute;
         top: 0;
         left: 0;
-        height: min(4vw, 4vh);
-        width: min(4vw, 4vh);
+        height: min(6.5vw, 6.5vh);
+        width: min(6.5vw, 6.5vh);
         background-color: var(--tg-theme-secondary-bg-color);
     }
 
@@ -133,18 +134,19 @@
     }
 
     .checkbox_container .checkmark:after {
-        left: min(1.4vw, 1.4vh);
-        top: min(0.8vw, 0.8vh);
-        width: min(0.9vw, 0.9vh);
-        height: min(1.5vw, 1.5vh);
+        left: min(2.5vw, 2.5vh);
+        top: min(1vw, 1vh);
+        width: min(1vw, 1vh);
+        height: min(2.3vw, 2.3vh);
         border: solid var(--tg-theme-button-text-color);
-        border-width: 0 min(0.6vw, 0.6vh) min(0.6vw, 0.6vh) 0;
+        border-width: 0 min(1vw, 1vh) min(1vw, 1vh) 0;
         -webkit-transform: rotate(45deg);
         -ms-transform: rotate(45deg);
         transform: rotate(45deg);
     }
 </style>
 <body>
+<div class="container">
 <div class="search_container">
     <input class="search" type="text" id="search" onkeyup="activity_filter()" placeholder="Поиск олимпиад">
     <label class="checkbox_container">Показать только выбранные
@@ -153,11 +155,10 @@
     </label>
 </div>
 <div class="divider"></div>
-<div class="container">
-    {% for olympiad in cool_olympiads %}
-        <button class="olympiad" id="{{ olympiad }}"
-                onclick="button_click('{{ olympiad }}'); activity_filter()">{{ olympiad }}</button>
-    {% endfor %}
+{% for olympiad in cool_olympiads %}
+    <button class="olympiad" id="{{ olympiad }}"
+            onclick="button_click('{{ olympiad }}'); activity_filter()">{{ olympiad }}</button>
+{% endfor %}
 </div>
 </body>
 <script type="application/javascript">
