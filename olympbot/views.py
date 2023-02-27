@@ -64,7 +64,7 @@ def show_olympiads(request, user_id: int):
         return Http404
     data = json.loads(data)
     user_olympiads = sorted(data["olympiads"])
-    cool_olympiads = db.all("SELECT activity_name FROM cool_olympiads")
+    cool_olympiads = db.all("SELECT activity_id, activity_name FROM cool_olympiads")
     context = {
         "user_olympiads": user_olympiads,
         "cool_olympiads": cool_olympiads

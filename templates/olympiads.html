@@ -155,9 +155,9 @@
     </label>
 </div>
 <div class="divider"></div>
-{% for olympiad in cool_olympiads %}
-    <button class="olympiad" id="{{ olympiad }}"
-            onclick="button_click('{{ olympiad }}'); activity_filter()">{{ olympiad }}</button>
+{% for olympiad, activity_id in cool_olympiads %}
+    <button class="olympiad" id="{{ activity_id }}"
+            onclick="button_click('{{ activity_id }}'); activity_filter()">{{ olympiad }}</button>
 {% endfor %}
 </div>
 </body>
@@ -192,8 +192,8 @@
         }
     }
 
-    {% for olympiad in user_olympiads %}
-        button_click('{{ olympiad }}')
+    {% for olympiad, activity_id in user_olympiads %}
+        button_click('{{ activity_id }}')
     {% endfor %}
 
     let tg = window.Telegram.WebApp;
