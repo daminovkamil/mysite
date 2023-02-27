@@ -1,5 +1,6 @@
 from django.shortcuts import render, Http404
 from mysql.connector import connect
+from django.views.decorators.cache import never_cache
 import json
 
 database_data = {
@@ -39,6 +40,7 @@ def all(*args):
             return res
 
 
+@never_cache
 def show_subjects(request, user_id: int):
     data = one("SELECT data FROM users WHERE user_id = %s" % user_id)
     if data is None:
@@ -47,6 +49,7 @@ def show_subjects(request, user_id: int):
     return render(request, "subjects.html", data)
 
 
+@never_cache
 def show_olympiads(request, user_id: int):
     data = one("SELECT data FROM users WHERE user_id = %s" % user_id)
     if data is None:
