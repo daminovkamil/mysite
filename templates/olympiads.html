@@ -195,7 +195,6 @@
     {% for olympiad, activity_id in user_olympiads %}
         button_click('{{ activity_id }}')
     {% endfor %}
-    activity_filter();
 
     let tg = window.Telegram.WebApp;
     tg.expand();
