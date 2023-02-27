@@ -1,0 +1,3 @@
+        WSGIDaemonProcess myproject python-home=/mysite/venv python-path=/mysite
+        WSGIProcessGroup myproject
+        WSGIScriptAlias / /mysite/mysite/wsgi.py
