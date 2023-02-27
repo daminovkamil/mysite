@@ -204,7 +204,7 @@
     tg.MainButton.show();
     tg.onEvent('mainButtonClicked', function () {
         let data = {
-            subjects: chosen_olympiads
+            olympiads: chosen_olympiads
         }
         tg.sendData(JSON.stringify(data));
     });

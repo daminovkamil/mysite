@@ -114,6 +114,7 @@
     {% for subject in subjects %}
     button_click('{{ subject }}')
     {% endfor %}
+    activity_filter();
 
     let tg = window.Telegram.WebApp;
     tg.expand();
