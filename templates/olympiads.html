@@ -31,15 +31,15 @@
     }
 
     .container {
-        margin-left: calc((100% - min(100vw, 100vh)) / 2);
+        margin: 0 auto;
         width: min(100vw, 100vh);
     }
 
     .olympiad {
+        vertical-align: middle;
         font-size: min(5vw, 5vh);
-        width: calc(100% - min(3vw, 3vh) * 2);
-        height: min(40vw, 40vh);
-        margin: min(3vw, 3vh);
+        width: calc(100% - min(6vw, 6vh));
+        height: min(60vw, 60vh);
         padding: min(5vw, 5vh);
         border-radius: min(4vw, 4vh);
         background: var(--tg-theme-bg-color);
@@ -49,6 +49,7 @@
         border-width: 0;
         box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         transition-duration: 0.4s;
+        margin: 0 min(3vw, 3vh);
     }
 
     .olympiad.added {
@@ -56,9 +57,8 @@
         background: var(--tg-theme-button-color);
         color: var(--tg-theme-button-text-color);
         box-shadow: none;
-        margin-left: 0;
-        margin-right: 0;
         width: 100%;
+        margin: 0;
         padding: min(8vw, 8vh);
     }
 
@@ -86,7 +86,6 @@
         margin-bottom: min(38vh, 38vw);
     }
 
-    /* Customize the label (the container) */
     .checkbox_container {
         text-align: center;
         font-size: min(4.5vw, 4.5vh);
@@ -100,7 +99,6 @@
         user-select: none;
     }
 
-    /* Hide the browser's default checkbox */
     .checkbox_container input {
         position: absolute;
         opacity: 0;
