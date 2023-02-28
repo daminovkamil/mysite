@@ -25,13 +25,13 @@
     }
 
     body {
+        overflow: hidden;
         padding: 0;
         margin: 0;
         background: var(--tg-theme-secondary-bg-color);
     }
 
     .container {
-        overflow: hidden;
         margin: 0 auto;
         width: min(100vw, 100vh);
     }
@@ -45,12 +45,11 @@
         border-radius: min(4vw, 4vh);
         background: var(--tg-theme-bg-color);
         color: var(--tg-theme-text-color);
-        float: left;
         text-align: center;
         border-width: 0;
         box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         transition-duration: 0.4s;
-        margin: min(3vw, 3vh) auto;
+        margin: min(3vw, 3vh) min(3vw, 3vh);
     }
 
     .olympiad.added {
