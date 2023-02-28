@@ -25,81 +25,183 @@
     }
 
     body {
+        overflow-x: hidden;
+        overflow-y: scroll;
         padding: 0;
         margin: 0;
         background: var(--tg-theme-secondary-bg-color);
     }
 
-    .container {
-        margin-left: calc((100% - min(100vw, 100vh)) / 2);
+    .grid-container {
         width: min(100vw, 100vh);
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        padding: min(1vh, 1vw);
+        margin: 0 auto;
+    }
+
+    .grid-item {
+        overflow: hidden;
+        padding: min(1vh, 1vw);
+        font-size: 30px;
+        text-align: center;
+        overflow-wrap: break-word;
     }
 
     .subject {
-        font-size: min(5vw, 5vh);
-        width: calc(100% - min(3vw, 3vh) * 2);
+        width: 100%;
+        margin: 0 auto;
         height: min(26vw, 26vh);
-        margin: min(3vw, 3vh);
-        padding: min(5vw, 5vh);
-        border-radius: min(2vw, 2vh);
         background: var(--tg-theme-bg-color);
         color: var(--tg-theme-text-color);
-        float: left;
-        text-align: center;
-        border-width: 0;
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+        font-size: min(3vw, 3vh);
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         transition-duration: 0.4s;
+        border-radius: min(3vw, 3vh);
+        vertical-align: middle;
+        padding: min(4vw, 4vh);
+        border-width: 0;
     }
 
     .subject.added {
-        border-radius: 0;
         background: var(--tg-theme-button-color);
-        color: var(--tg-theme-button-text-color);
-        box-shadow: none;
-        margin-left: 0;
-        margin-right: 0;
-        width: 100%;
+    }
+
+    .delete-all {
+        position: fixed;
+        bottom: min(5vw, 5vh);
+        right: min(5vw, 5vh);
+        border: 0;
+        background: red;
+        color: white;
+        border-radius: min(5vw, 5vh);
+        width: min(30vw, 30vh);
+        height: min(10vw, 10vw);
+        font-size: min(3vw, 3vh);
     }
 </style>
 <body>
-<div class="container">
-    <button class="subject" onclick="button_click('Английский язык')" id="Английский язык">Английский язык</button>
-    <button class="subject" onclick="button_click('Арабский язык')" id="Арабский язык">Арабский язык</button>
-    <button class="subject" onclick="button_click('Астрономия')" id="Астрономия">Астрономия</button>
-    <button class="subject" onclick="button_click('Биология')" id="Биология">Биология</button>
-    <button class="subject" onclick="button_click('География')" id="География">География</button>
-    <button class="subject" onclick="button_click('ИЗО')" id="ИЗО">ИЗО</button>
-    <button class="subject" onclick="button_click('Информатика')" id="Информатика">Информатика</button>
-    <button class="subject" onclick="button_click('Искусство')" id="Искусство">Искусство</button>
-    <button class="subject" onclick="button_click('Испанский язык')" id="Испанский язык">Испанский язык</button>
-    <button class="subject" onclick="button_click('История')" id="История">История</button>
-    <button class="subject" onclick="button_click('Итальянский язык')" id="Итальянский язык">Итальянский язык</button>
-    <button class="subject" onclick="button_click('Китайский язык')" id="Китайский язык">Китайский язык</button>
-    <button class="subject" onclick="button_click('Лингвистика')" id="Лингвистика">Лингвистика</button>
-    <button class="subject" onclick="button_click('Литература')" id="Литература">Литература</button>
-    <button class="subject" onclick="button_click('Математика')" id="Математика">Математика</button>
-    <button class="subject" onclick="button_click('Менеджмент')" id="Менеджмент">Менеджмент</button>
-    <button class="subject" onclick="button_click('Немецкий язык')" id="Немецкий язык">Немецкий язык</button>
-    <button class="subject" onclick="button_click('ОБЖ')" id="ОБЖ">ОБЖ</button>
-    <button class="subject" onclick="button_click('Обществознание')" id="Обществознание">Обществознание</button>
-    <button class="subject" onclick="button_click('Основы предпринимательства')" id="Основы предпринимательства">Основы предпринимательства</button>
-    <button class="subject" onclick="button_click('Право')" id="Право">Право</button>
-    <button class="subject" onclick="button_click('Психология')" id="Психология">Психология</button>
-    <button class="subject" onclick="button_click('Робототехника')" id="Робототехника">Робототехника</button>
-    <button class="subject" onclick="button_click('Русский язык')" id="Русский язык">Русский язык</button>
-    <button class="subject" onclick="button_click('Технология')" id="Технология">Технология</button>
-    <button class="subject" onclick="button_click('Физика')" id="Физика">Физика</button>
-    <button class="subject" onclick="button_click('Физическая культура')" id="Физическая культура">Физическая культура</button>
-    <button class="subject" onclick="button_click('Французский язык')" id="Французский язык">Французский язык</button>
-    <button class="subject" onclick="button_click('Химия')" id="Химия">Химия</button>
-    <button class="subject" onclick="button_click('Черчение')" id="Черчение">Черчение</button>
-    <button class="subject" onclick="button_click('Экология')" id="Экология">Экология</button>
-    <button class="subject" onclick="button_click('Экономика')" id="Экономика">Экономика</button>
-    <button class="subject" onclick="button_click('Японский язык')" id="Японский язык">Японский язык</button>
+<div class="grid-container">
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Английский язык')" id="Английский язык">Английский язык</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Китайский язык')" id="Китайский язык">Китайский язык</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Робототехника')" id="Робототехника">Робототехника</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Арабский язык')" id="Арабский язык">Арабский язык</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Лингвистика')" id="Лингвистика">Лингвистика</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Русский язык')" id="Русский язык">Русский язык</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Астрономия')" id="Астрономия">Астрономия</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Литература')" id="Литература">Литература</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Технология')" id="Технология">Технология</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Биология')" id="Биология">Биология</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Математика')" id="Математика">Математика</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Физика')" id="Физика">Физика</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('География')" id="География">География</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Менеджмент')" id="Менеджмент">Менеджмент</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Физическая культура')" id="Физическая культура">Физическая культура</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('ИЗО')" id="ИЗО">ИЗО</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Немецкий язык')" id="Немецкий язык">Немецкий язык</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Французский язык')" id="Французский язык">Французский язык</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Информатика')" id="Информатика">Информатика</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('ОБЖ')" id="ОБЖ">ОБЖ</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Химия')" id="Химия">Химия</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Искусство')" id="Искусство">Искусство</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Обществознание')" id="Обществознание">Обществознание</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Черчение')" id="Черчение">Черчение</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Испанский язык')" id="Испанский язык">Испанский язык</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Основы предпринимательства')" id="Основы предпринимательства">Основы предпринимательства</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Экология')" id="Экология">Экология</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('История')" id="История">История</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Право')" id="Право">Право</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Экономика')" id="Экономика">Экономика</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Итальянский язык')" id="Итальянский язык">Итальянский язык</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Психология')" id="Психология">Психология</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Японский язык')" id="Японский язык">Японский язык</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Китайский язык')" id="Китайский язык">Китайский язык</button>
+    </div>
+    <div class="grid-item">
+        <button class="subject" onclick="button_click('Робототехника')" id="Робототехника">Робототехника</button>
+    </div>
 </div>
+<button class="delete-all" onclick="delete_all()" id="delete-all">Очистить</button>
 </body>
 <script type="application/javascript">
     let chosen_subjects = [];
+
+    function check_chosen() {
+        let button = document.getElementById("delete-all");
+        if (chosen_subjects.length === 0) {
+            button.style.display = "none";
+        } else {
+            button.style.display = "";
+        }
+    }
+
     function button_click(button_id) {
         let button = document.getElementById(button_id);
         if (button.classList.contains("added")) {
@@ -109,22 +211,21 @@
             button.classList.add("added");
             chosen_subjects.push(button_id);
         }
+        check_chosen();
     }
 
-    {% for subject in subjects %}
-    button_click('{{ subject }}');
-    {% endfor %}
-
-    let tg = window.Telegram.WebApp;
-    tg.expand();
-    tg.MainButton.color = "#0dbb00";
-    tg.MainButton.text = "Сохранить";
-    tg.MainButton.show();
-    tg.onEvent('mainButtonClicked', function(){
-        let data = {
-            subjects: chosen_subjects
+    function delete_all() {
+        let buttons = document.getElementsByClassName("subject");
+        for (let i = 0; i < buttons.length; i += 1) {
+            let button = buttons[i];
+            if (button.classList.contains("added")) {
+                button.classList.remove("added");
+            }
         }
-        tg.sendData(JSON.stringify(data));
-    });
+        chosen_subjects.splice(0, chosen_subjects.length);
+        check_chosen();
+    }
+
+
 </script>
 </html>
