@@ -32,12 +32,16 @@
         background: var(--tg-theme-secondary-bg-color);
     }
 
-    .grid-container {
+    .container {
+        margin: 0 auto;
         width: min(100vw, 100vh);
+    }
+
+    .grid-container {
+        width: 100%;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         padding: min(1vh, 1vw);
-        margin: 0 auto;
     }
 
     .grid-item {
@@ -69,19 +73,20 @@
 
     .delete-all {
         position: fixed;
-        bottom: min(5vw, 5vh);
-        right: min(5vw, 5vh);
+        top: min(2vw, 2vh);
+        width: min(100vw, 100vh);
         border: 0;
-        background: red;
+        background: #c00000;
         color: white;
         border-radius: min(5vw, 5vh);
-        width: min(30vw, 30vh);
         height: min(10vw, 10vw);
         font-size: min(3vw, 3vh);
     }
 </style>
 <body>
-<div class="grid-container">
+<div class="container">
+<button class="delete-all" onclick="delete_all()" id="delete-all">Очистить</button>
+<div class="grid-container" id="grid-container">
     <div class="grid-item">
         <button class="subject" onclick="button_click('Английский язык')" id="Английский язык">Английский язык</button>
     </div>
@@ -188,17 +193,20 @@
         <button class="subject" onclick="button_click('Робототехника')" id="Робототехника">Робототехника</button>
     </div>
 </div>
-<button class="delete-all" onclick="delete_all()" id="delete-all">Очистить</button>
+</div>
 </body>
 <script type="application/javascript">
     let chosen_subjects = [];
 
     function check_chosen() {
         let button = document.getElementById("delete-all");
+        let grid_container = document.getElementById("grid-container");
         if (chosen_subjects.length === 0) {
             button.style.display = "none";
+            grid_container.style.marginTop = "0";
         } else {
             button.style.display = "";
+            grid_container.style.marginTop = "min(14vw, 14vh)";
         }
     }
 
