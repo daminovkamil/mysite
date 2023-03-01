@@ -37,23 +37,19 @@ tag_list = [
 A = []
 c = (len(tag_list) + 2) // 3
 
+print(len(tag_list))
+
 i = 0
-while True:
-    if i < len(tag_list):
-        A.append(tag_list[i])
-    else:
-        break
-    if i + c < len(tag_list):
-        A.append(tag_list[i + c])
-    else:
-        break
-    if i + c + c < len(tag_list):
-        A.append(tag_list[i + c + c])
-    else:
-        break
+while i < c:
+    A.append(tag_list[i])
+    A.append(tag_list[i + c])
+    A.append(tag_list[i + c + c])
+    print(i, i + c, i + c + c)
     i += 1
 
+num = 1
 for i in A:
     print(f"""    <div class="grid-item">
-        <button class="subject" onclick="button_click('{i}')" id="{i}">{i}</button>
+        <button class="subject" onclick="button_click({num})" id='{num}'>{i}</button>
     </div>""")
+    num += 1
