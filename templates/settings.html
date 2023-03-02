@@ -89,11 +89,11 @@
     let settings = JSON.parse('{% autoescape off %}{{ settings }}{% endautoescape %}');
 
     function check_state() {
+        let filters = document.getElementsByClassName("filter");
         if (settings["news_enabled"]) {
             let news = document.getElementById("news");
             let button = news.getElementsByTagName("input")[0];
             button.checked = true;
-            let filters = document.getElementsByClassName("filter");
             filters[0].style.display = "";
             filters[1].style.display = "";
         } else {
@@ -104,6 +104,10 @@
             filters[0].style.display = "none";
             filters[1].style.display = "none";
         }
+        filters[0].checked = settings["subjects_filter"];
+        filters[1].checked = settings["olympiads_filter"];
+        let olympiad_button = document.getElementById("notifications");
+        olympiad_button.checked = settings["notifications_enabled"];
     }
 
     check_state();
