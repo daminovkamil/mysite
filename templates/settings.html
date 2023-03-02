@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<style>
+    :root {
+        font-family: 'Roboto Slab', serif;
+        font-style: normal;
+        font-weight: normal;
+        {% if DEBUG %}--tg-theme-bg-color: #17212B;
+            --tg-theme-text-color: #D1F2F0;
+            --tg-theme-hint-color: #556C80;
+            --tg-theme-link-color: #6BBFFF;
+            --tg-theme-button-color: #2B5278;
+            --tg-theme-button-text-color: white;
+            --tg-theme-secondary-bg-color: #0E1621;{% endif %}
+    }
+
+    body {
+        padding: 0;
+        margin: 0;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        background: var(--tg-theme-secondary-bg-color);
+    }
+
+    .container {
+        margin: 0 auto;
+        width: min(100vw, 100vh);
+        padding: min(5vw, 5vh);
+    }
+
+    label {
+        font-size: min(5vw, 5vh);
+        color: var(--tg-theme-text-color);
+    }
+
+    label input {
+        width: min(5vw, 5vh);
+        height: min(5vw, 5vh);
+        margin-right: min(4vw, 4vh);
+    }
+
+    .variant p {
+        font-size: min(2.6vw, 2.6vh);
+        color: var(--tg-theme-hint-color);
+    }
+
+    .variant p a {
+        color: var(--tg-theme-link-color);
+    }
+
+    .variant {
+        margin: min(5vw, 5vh);
+    }
+</style>
+<body>
+<div class="container">
+    <div class="variant" id="news">
+        <label><input type="checkbox" onclick="settings['news_enabled'] ^= 1; check_state()">Присылать новости</label>
+        <p>Если вы выберите этот пункт, то бот будет периодически присылать вам новости со странички сайта <a
+                href="https://olimpiada.ru/news">olimpiada.ru/news</a>. Поток новостей <b>можно фильтровать</b>
+            (выберите пункт и вам откроются настройки фильтра).</p>
+    </div>
+    <div class="variant filter">
+        <label><input type="checkbox" onclick="settings['subjects_filter'] ^= 1">Фильтровать новости по предметам</label>
+        <p>Если вы выберите этот пункт, то бот будет фильтровать входящие новости по выбранным вами предметам.</p>
+    </div>
+    <div class="variant filter">
+        <label><input type="checkbox" onclick="settings['olympiads_filter'] ^= 1">Фильтровать новости по олимпиадам</label>
+        <p>Если вы выберите этот пункт, то бот будет фильтровать входящие новости по олимпиадам, которые вы выбрали.</p>
+    </div>
+    <div class="variant" id="notifications">
+        <label><input type="checkbox" onload="settings['notifications_enabled'] ^= 1">Присылать уведомления</label>
+        <p>Уведомления - это сообщения, связанные с событиями каких-то олимпиад. Например, сообщение может быть таким:
+            "Через 3 дня отборочный этап".</p>
+    </div>
+</div>
+</body>
+<script type="application/javascript">
+    let settings = JSON.parse('{% autoescape off %}{{ settings }}{% endautoescape %}');
+
+    function check_state() {
+        if (settings["news_enabled"]) {
+            let news = document.getElementById("news");
+            let button = news.getElementsByTagName("input")[0];
+            button.checked = true;
+            let filters = document.getElementsByClassName("filter");
+            filters[0].style.display = "";
+            filters[1].style.display = "";
+        } else {
+            let news = document.getElementById("news");
+            let button = news.getElementsByTagName("input")[0];
+            button.checked = false;
+            let filters = document.getElementsByClassName("filter");
+            filters[0].style.display = "none";
+            filters[1].style.display = "none";
+        }
+    }
+
+    check_state();
+
+    {% if not DEBUG %}let tg = window.Telegram.WebApp;
+        tg.expand();
+        tg.MainButton.color = "#0dbb00";
+        tg.MainButton.text = "Сохранить";
+        tg.MainButton.show();
+        tg.onEvent('mainButtonClicked', function () {
+            tg.sendData(JSON.stringify(settings));
+        });{% endif %}
+</script>
+</html>

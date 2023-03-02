@@ -1,6 +1,7 @@
 from django.shortcuts import render, Http404
 from mysql.connector import connect
 from django.views.decorators.cache import never_cache
+from mysite.settings import DEBUG
 import json
 
 database_data = {
@@ -46,6 +47,7 @@ def show_subjects(request, user_id: int):
     if data is None:
         return Http404
     data = json.loads(data)
+    data["DEBUG"] = True
     return render(request, "subjects.html", data)
 
 
@@ -59,6 +61,19 @@ def show_olympiads(request, user_id: int):
     cool_olympiads = all("SELECT activity_name, activity_id FROM cool_olympiads")
     context = {
         "user_olympiads": user_olympiads,
-        "cool_olympiads": cool_olympiads
+        "cool_olympiads": cool_olympiads,
+        "DEBUG": DEBUG
     }
     return render(request, "olympiads.html", context)
+
+
+@never_cache
+def show_settings(request, user_id: int):
+    settings = one("SELECT settings FROM users WHERE user_id = %s" % user_id)
+    if settings is None:
+        return Http404
+    context = {
+        "settings": settings,
+        "DEBUG": DEBUG
+    }
+    return render(request, "settings.html", context)

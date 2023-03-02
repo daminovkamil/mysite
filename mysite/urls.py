@@ -20,5 +20,6 @@ import olympbot.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('subjects/<int:user_id>', olympbot.views.show_subjects),
-    path('olympiads/<int:user_id>', olympbot.views.show_olympiads)
+    path('olympiads/<int:user_id>', olympbot.views.show_olympiads),
+    path('settings/<int:user_id>', olympbot.views.show_settings)
 ]
