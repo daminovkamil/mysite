@@ -74,6 +74,7 @@ def show_settings(request, user_id: int):
         return Http404
     context = {
         "settings": settings,
+        "user_id": user_id,
         "DEBUG": DEBUG
     }
     return render(request, "settings.html", context)

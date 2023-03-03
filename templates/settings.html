@@ -118,12 +118,10 @@
     {% if not DEBUG %}let tg = window.Telegram.WebApp;
         tg.expand();
         function go_subjects() {
-            let user_id = tg.initDataUnsafe.user.id;
-            tg.openTelegramLink("https://olympbot.kdaminov.ru/subjects/" + user_id);
+            tg.openTelegramLink("https://olympbot.kdaminov.ru/subjects/{{ user_id }}");
         }
         function go_olympiads() {
-            let user_id = tg.initDataUnsafe.user.id;
-            tg.openTelegramLink("https://olympbot.kdaminov.ru/olympiads/" + user_id);
+            tg.openTelegramLink("https://olympbot.kdaminov.ru/olympiads/{{ user_id }}");
         }
         tg.MainButton.color = "#0dbb00";
         tg.MainButton.text = "Сохранить";
