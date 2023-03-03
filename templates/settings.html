@@ -71,11 +71,13 @@
             (выберите пункт и вам откроются настройки фильтра).</p>
     </div>
     <div class="variant filter">
-        <label><input type="checkbox" onclick="settings['subjects_filter'] ^= 1">Фильтровать новости по предметам</label>
+        <label><input type="checkbox" onclick="settings['subjects_filter'] ^= 1">Фильтровать новости по <a
+                onclick="go_subjects()">предметам</a></label>
         <p>Если вы выберите этот пункт, то бот будет фильтровать входящие новости по выбранным вами предметам.</p>
     </div>
     <div class="variant filter">
-        <label><input type="checkbox" onclick="settings['olympiads_filter'] ^= 1">Фильтровать новости по олимпиадам</label>
+        <label><input type="checkbox" onclick="settings['olympiads_filter'] ^= 1">Фильтровать новости по
+            <a onclick="go_olympiads()">олимпиадам</a></label>
         <p>Если вы выберите этот пункт, то бот будет фильтровать входящие новости по олимпиадам, которые вы выбрали.</p>
     </div>
     <div class="variant" id="notifications">
@@ -113,14 +115,21 @@
     }
 
     check_state();
-
     {% if not DEBUG %}let tg = window.Telegram.WebApp;
-    tg.expand();
-    tg.MainButton.color = "#0dbb00";
-    tg.MainButton.text = "Сохранить";
-    tg.MainButton.show();
-    tg.onEvent('mainButtonClicked', function () {
-        tg.sendData(JSON.stringify(settings));
-    });{% endif %}
+        tg.expand();
+        function go_subjects() {
+            let user_id = tg.initDataUnsafe.user.id;
+            tg.openTelegramLink("https://olympbot.kdaminov.ru/subjects/" + user_id);
+        }
+        function go_olympiads() {
+            let user_id = tg.initDataUnsafe.user.id;
+            tg.openTelegramLink("https://olympbot.kdaminov.ru/olympiads/" + user_id);
+        }
+        tg.MainButton.color = "#0dbb00";
+        tg.MainButton.text = "Сохранить";
+        tg.MainButton.show();
+        tg.onEvent('mainButtonClicked', function () {
+            tg.sendData(JSON.stringify(settings));
+        });{% endif %}
 </script>
 </html>
