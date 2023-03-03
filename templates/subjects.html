@@ -228,10 +228,10 @@
         check_chosen();
     }
 
-{#    {% for subject in subjects %}#}
-{#    button_click('{{ subject }}');#}
-{#    {% endfor %}#}
-{#    check_chosen();#}
+    {% for subject in subjects %}
+    button_click('{{ subject }}');
+    {% endfor %}
+    check_chosen();
 
     {% if not DEBUG %}let tg = window.Telegram.WebApp;
     tg.expand();

@@ -47,7 +47,7 @@ def show_subjects(request, user_id: int):
     if data is None:
         return Http404
     data = json.loads(data)
-    data["DEBUG"] = True
+    data["DEBUG"] = DEBUG
     return render(request, "subjects.html", data)
 
 
