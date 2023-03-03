@@ -196,11 +196,20 @@
         let button = document.getElementById("delete-all");
         let grid_container = document.getElementById("grid-container");
         if (chosen_subjects.length === 0) {
+            if (grid_container.offsetTop !== 0) {
+                let dist = Math.min(window.innerWidth * 0.2, window.innerHeight * 0.2);
+                window.scroll(0, window.scrollY - dist);
+            }
             button.style.display = "none";
             grid_container.style.marginTop = "0";
         } else {
+            let flag = (grid_container.offsetTop === 0);
             button.style.display = "";
             grid_container.style.marginTop = "min(20vw, 20vh)";
+            if (flag) {
+                let dist = Math.min(window.innerWidth * 0.2, window.innerHeight * 0.2);
+                window.scroll(0, window.scrollY + dist);
+            }
         }
     }
 
