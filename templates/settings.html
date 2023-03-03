@@ -34,7 +34,7 @@
 
     .container {
         margin: 0 auto;
-        width: min(100vw, 100vh);
+        width: min(89vw, 89vh);
         padding: min(5vw, 5vh);
     }
 
@@ -104,10 +104,12 @@
             filters[0].style.display = "none";
             filters[1].style.display = "none";
         }
-        filters[0].checked = settings["subjects_filter"];
-        filters[1].checked = settings["olympiads_filter"];
-        let olympiad_button = document.getElementById("notifications");
-        olympiad_button.checked = settings["notifications_enabled"];
+        let subjects_button = filters[0].getElementsByTagName("input")[0];
+        let olympiads_button = filters[1].getElementsByTagName("input")[0];
+        subjects_button.checked = settings["subjects_filter"];
+        olympiads_button.checked = settings["olympiads_filter"];
+        let notifications_button = document.getElementById("notifications").getElementsByTagName("input")[0];
+        notifications_button.checked = settings["notifications_enabled"];
     }
 
     check_state();
