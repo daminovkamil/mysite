@@ -190,12 +190,12 @@
 </div>
 </body>
 <script type="application/javascript">
-    let chosen_count = 0;
+    let chosen_subjects = [];
 
     function check_chosen() {
         let button = document.getElementById("delete-all");
         let grid_container = document.getElementById("grid-container");
-        if (chosen_count === 0) {
+        if (chosen_subjects.length === 0) {
             button.style.display = "none";
             grid_container.style.marginTop = "0";
         } else {
@@ -208,10 +208,10 @@
         let button = document.getElementById(button_id);
         if (button.classList.contains("added")) {
             button.classList.remove("added");
-            chosen_count -= 1;
+            chosen_subjects.splice(chosen_subjects.indexOf(button_id), 1);
         } else {
             button.classList.add("added");
-            chosen_count += 1;
+            chosen_subjects.push(button_id);
         }
         check_chosen();
     }
@@ -224,7 +224,7 @@
                 button.classList.remove("added");
             }
         }
-        chosen_count = 0;
+        chosen_subjects.splice(0, chosen_subjects.length);
         check_chosen();
     }
 
@@ -238,15 +238,7 @@
     tg.MainButton.color = "#0dbb00";
     tg.MainButton.text = "Сохранить";
     tg.MainButton.show();
-    tg.onEvent('mainButtonClicked', function(){
-        let chosen_subjects = [];
-        let buttons = document.getElementsByClassName("subject");
-        for (let i = 0; i < buttons.length; i += 1) {
-            let button = buttons[i];
-            if (button.classList.contains("added")) {
-                chosen_subjects.push(button.innerText);
-            }
-        }
+    tg.onEvent('mainButtonClicked', function () {
         let data = {
             subjects: chosen_subjects
         }
