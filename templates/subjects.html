@@ -191,49 +191,7 @@
 </body>
 <script type="application/javascript">
     let chosen_subjects = [];
-
-    function check_chosen() {
-        let button = document.getElementById("delete-all");
-        let grid_container = document.getElementById("grid-container");
-        if (chosen_subjects.length === 0) {
-            button.style.display = "none";
-            grid_container.style.marginTop = "0";
-        } else {
-            button.style.display = "";
-            grid_container.style.marginTop = "min(20vw, 20vh)";
-        }
-    }
-
-    function button_click(button_id) {
-        let button = document.getElementById(button_id);
-        if (button.classList.contains("added")) {
-            button.classList.remove("added");
-            chosen_subjects.splice(chosen_subjects.indexOf(button_id), 1);
-        } else {
-            button.classList.add("added");
-            chosen_subjects.push(button_id);
-        }
-        check_chosen();
-    }
-
-    function delete_all() {
-        let buttons = document.getElementsByClassName("subject");
-        for (let i = 0; i < buttons.length; i += 1) {
-            let button = buttons[i];
-            if (button.classList.contains("added")) {
-                button.classList.remove("added");
-            }
-        }
-        chosen_subjects.splice(0, chosen_subjects.length);
-        check_chosen();
-    }
-
-    {% for subject in subjects %}
-    button_click('{{ subject }}');
-    {% endfor %}
-    check_chosen();
-
-    {% if not DEBUG %}let tg = window.Telegram.WebApp;
+    let tg = window.Telegram.WebApp;
     tg.expand();
     tg.MainButton.color = "#0dbb00";
     tg.MainButton.text = "Сохранить";
@@ -243,6 +201,6 @@
             subjects: chosen_subjects
         }
         tg.sendData(JSON.stringify(data));
-    });{% endif %}
+    });
 </script>
 </html>
