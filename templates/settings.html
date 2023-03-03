@@ -72,12 +72,12 @@
     </div>
     <div class="variant filter">
         <label><input type="checkbox" onclick="settings['subjects_filter'] ^= 1">Фильтровать новости по <a
-                onclick="go_subjects()">предметам</a></label>
+                onclick="go_subjects()" href="#" style="color: var(--tg-theme-text-color)">предметам</a></label>
         <p>Если вы выберите этот пункт, то бот будет фильтровать входящие новости по выбранным вами предметам.</p>
     </div>
     <div class="variant filter">
         <label><input type="checkbox" onclick="settings['olympiads_filter'] ^= 1">Фильтровать новости по
-            <a onclick="go_olympiads()">олимпиадам</a></label>
+            <a onclick="go_olympiads()" href="#" style="color: var(--tg-theme-text-color)">олимпиадам</a></label>
         <p>Если вы выберите этот пункт, то бот будет фильтровать входящие новости по олимпиадам, которые вы выбрали.</p>
     </div>
     <div class="variant" id="notifications">
