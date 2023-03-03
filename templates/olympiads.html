@@ -196,7 +196,7 @@
     button_click('{{ activity_id }}');
     {% endfor %}
 
-    {% if not DEBUG %}let tg = window.Telegram.WebApp;
+    let tg = window.Telegram.WebApp;
     tg.expand();
     tg.MainButton.color = "#0dbb00";
     tg.MainButton.text = "Сохранить";
@@ -206,6 +206,6 @@
             olympiads: chosen_olympiads
         }
         tg.sendData(JSON.stringify(data));
-    });{% endif %}
+    });
 </script>
 </html>
