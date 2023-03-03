@@ -146,55 +146,8 @@
     }
 </style>
 <body>
-<div class="container">
-<div class="search_container">
-    <input class="search" type="text" id="search" onkeyup="activity_filter()" placeholder="Поиск олимпиад">
-    <label class="checkbox_container">Показать только выбранные
-        <input type="checkbox" id="checkbox" onclick="activity_filter()">
-        <span class="checkmark"></span>
-    </label>
-</div>
-<div class="divider"></div>
-{% for olympiad, activity_id in cool_olympiads %}
-    <button class="olympiad" id="{{ activity_id }}"
-            onclick="button_click('{{ activity_id }}'); activity_filter()">{{ olympiad }}</button>
-{% endfor %}
-</div>
 </body>
 <script type="application/javascript">
-    let chosen_olympiads = [];
-
-    function button_click(button_id) {
-        let button = document.getElementById(button_id);
-        if (button.classList.contains("added")) {
-            button.classList.remove("added");
-            chosen_olympiads.splice(chosen_olympiads.indexOf(button_id), 1);
-        } else {
-            button.classList.add("added");
-            chosen_olympiads.push(button_id);
-        }
-    }
-
-    function activity_filter() {
-        let input = document.getElementById('search');
-        let filter = input.value.toUpperCase();
-        let activities = document.getElementsByClassName("olympiad");
-        let checkbox = document.getElementById("checkbox");
-
-        for (let i = 0; i < activities.length; i++) {
-            let txtValue = activities[i].innerHTML;
-            if (txtValue.toUpperCase().indexOf(filter) > -1 &&
-                (!checkbox.checked || activities[i].classList.contains("added"))) {
-                activities[i].style.display = "";
-            } else {
-                activities[i].style.display = "none";
-            }
-        }
-    }
-
-    {% for activity_id in user_olympiads %}
-    button_click('{{ activity_id }}');
-    {% endfor %}
 
     let tg = window.Telegram.WebApp;
     tg.expand();
